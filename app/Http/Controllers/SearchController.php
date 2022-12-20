@@ -6,18 +6,15 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use function PHPUnit\Framework\isEmpty;
+
 class SearchController extends Controller
 {
-    
+
     public function search(Request $request)
     {       
-        $response = Http::get("http://www.omdbapi.com/?s={$request['title']}&apikey=".env("OMDB_API_KEY"))
-            ->throw()->json();
+        $response = http::get("http://www.omdbapi.com/?s={$request['title']}&apikey=".env("OMDB_API_KEY"));
 
-        if($response['Response'] == "False") {
-            return response()->json($response, 404);
-        }
-
-        return response()->json($response, 200);
+        return response()->json($response->json(), $response->status());
     }
 }
