@@ -17,7 +17,7 @@ class MoviesWatchedFactory extends Factory
     public function definition()
     {
         return [
-            "id_move" => fake()->numberBetween(1000, 9999),
+            "id_movie" => fake()->numberBetween(1000, 9999),
             "id_user" => fake()->numberBetween(1, 10),
         ];
     }

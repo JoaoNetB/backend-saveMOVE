@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_user')->references('id')
                     ->on('users')->onDelete('cascade');
-            $table->integer('id_move');
+            $table->string('id_movie');
             $table->timestamps();
 
         });
