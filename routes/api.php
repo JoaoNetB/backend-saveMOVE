@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware("auth:sanctum")->group(function() {
-    Route::get("/watched_list", [MoviesWatchedController::class, "listMovies"]);
+    Route::get("/watched_list/list", [MoviesWatchedController::class, "listMovies"]);
+
+    Route::post("/watched_list/save", [MoviesWatchedController::class, "saveMove"]);
 
     Route::get("/search/{title}", [SearchController::class, "search"]);
 
-    Route::get("/movie-data/{movie}", [SearchController::class, "searchMovieId"]);
+    Route::get("/movie_data/{movie}", [SearchController::class, "searchMovieId"]);
 });
 
 

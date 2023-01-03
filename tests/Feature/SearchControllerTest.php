@@ -129,7 +129,7 @@ class SearchControllerTest extends TestCase
             ], 200)
         ]);
 
-        $response = $this->getJson("/api/movie-data/tt2342235");
+        $response = $this->getJson("/api/movie_data/tt2342235");
 
         $response->assertStatus(200);
 
@@ -163,7 +163,7 @@ class SearchControllerTest extends TestCase
             ], 200)
         ]);
 
-        $response = $this->getJson("/api/movie-data/erro");
+        $response = $this->getJson("/api/movie_data/erro");
 
         $response->assertStatus(200);
 
