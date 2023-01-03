@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('id_user')->references('id')
                     ->on('users')->onDelete('cascade');
             $table->string('id_movie');
+            $table->string('title');
+            $table->text("poster");
             $table->timestamps();
 
         });

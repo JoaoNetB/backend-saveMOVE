@@ -11,7 +11,9 @@ class MoviesWatched extends Model
 
     protected $fillable = [
         'id_user',
-        'id_movie'
+        'id_movie',
+        'title',
+        'poster'
     ];
 
 }

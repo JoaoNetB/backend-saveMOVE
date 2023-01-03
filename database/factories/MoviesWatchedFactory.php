@@ -19,6 +19,8 @@ class MoviesWatchedFactory extends Factory
         return [
             "id_movie" => fake()->numberBetween(1000, 9999),
             "id_user" => fake()->numberBetween(1, 10),
+            "title" => fake()->text(50),
+            "poster" => fake()->imageUrl
         ];
     }
 }

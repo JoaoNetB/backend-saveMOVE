@@ -28,14 +28,18 @@ class MoviesWatchedController extends Controller
     public function saveMove(Request $request)
     {
         $validated = $request->validate([
-            "id_movie" => "required|string"
+            "id_movie" => "required|string",
+            "title" => "required|string",
+            "poster" => "required|string"
         ]);
 
         $user = Auth::user();
 
         $movieWatchedCreated = MoviesWatched::create([
-            "id_user" => $user['id'],
-            "id_movie" => $validated["id_movie"]
+            "id_user" => $user["id"],
+            "id_movie" => $validated["id_movie"],
+            "title" => $validated["title"],
+            "poster" => $validated["poster"]
         ]);
 
         return response()->json($movieWatchedCreated, 200);

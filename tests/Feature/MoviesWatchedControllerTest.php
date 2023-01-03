@@ -62,7 +62,9 @@ class MoviesWatchedControllerTest extends TestCase
         Sanctum::actingAs($user);
 
         $response = $this->postJson('/api/watched_list/save', [
-            "id_movie" => "tt000000"
+            "id_movie" => "tt000000",
+            "title" => "teste",
+            "poster" => "https://teste-image.jpg"
         ]);
 
         $response->assertStatus(200);
@@ -70,6 +72,8 @@ class MoviesWatchedControllerTest extends TestCase
         $response->assertJson(fn (AssertableJson $json) =>
         $json->where("id_user", 1)
             ->where("id_movie", "tt000000")
+            ->where("title", "teste")
+            ->where("poster", "https://teste-image.jpg")
             ->where("id", 1)
             ->etc()
         );
@@ -90,7 +94,7 @@ class MoviesWatchedControllerTest extends TestCase
         $response->assertStatus(422);
 
         $response->assertJson(fn (AssertableJson $json) =>
-        $json->where("message", "The id movie field is required.")
+        $json->where("message", "The id movie field is required. (and 2 more errors)")
             ->etc()
         );
     }
