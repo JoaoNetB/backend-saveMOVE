@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\MoviesWatched;
+use App\Models\WishlistMovies;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +16,10 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
+    {
         \App\Models\User::factory(10)->create();
         MoviesWatched::factory(10)->create();
+        WishlistMovies::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -3,6 +3,7 @@
 use App\Http\Controllers\MoviesWatchedController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistMoviesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,12 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth:sanctum")->group(function() {
     Route::get("/watched_list/list", [MoviesWatchedController::class, "listMovies"]);
-
-    Route::post("/watched_list/save", [MoviesWatchedController::class, "saveMove"]);
+    Route::post("/watched_list/save", [MoviesWatchedController::class, "saveMovie"]);
 
     Route::get("/search/{title}", [SearchController::class, "search"]);
 
     Route::get("/movie_data/{movie}", [SearchController::class, "searchMovieId"]);
+
+    Route::post("/wishlist_movie/save", [WishlistMoviesController::class, "saveMovie"]);
 });
 
 
