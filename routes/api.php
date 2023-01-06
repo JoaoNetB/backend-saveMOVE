@@ -27,6 +27,7 @@ Route::middleware("auth:sanctum")->group(function() {
     Route::get("/movie_data/{movie}", [SearchController::class, "searchMovieId"]);
 
     Route::post("/wishlist_movie/save", [WishlistMoviesController::class, "saveMovie"]);
+    Route::get("/wishlist_movie/list", [WishlistMoviesController::class, "listMovies"]);
 });
 
 

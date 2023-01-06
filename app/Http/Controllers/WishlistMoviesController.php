@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class WishlistMoviesController extends Controller
 {
+    public function listMovies()
+    {
+        $user = Auth::user();
+
+        $WishlistMovies = WishlistMovies::where('id_user', $user['id'])->paginate(10);
+
+        return response()->json($WishlistMovies, 200);
+    }
+
     public function saveMovie(Request $request)
     {
         $validated = $request->validate([
