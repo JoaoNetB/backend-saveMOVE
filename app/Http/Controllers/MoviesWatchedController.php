@@ -44,4 +44,16 @@ class MoviesWatchedController extends Controller
 
         return response()->json($movieWatchedCreated, 200);
     }
+
+    public function deleteMovie(Request $request)
+    {
+        $validated = $request->validate([
+            "id_movie" => "required|string",
+        ]);
+
+        $MoviesWatchedDeleted = MoviesWatched::where("id_movie", $validated["id_movie"])->delete();
+
+        return response()->json($MoviesWatchedDeleted, 200);
+    }
 }
+

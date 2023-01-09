@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware("auth:sanctum")->group(function() {
     Route::get("/watched_list/list", [MoviesWatchedController::class, "listMovies"]);
     Route::post("/watched_list/save", [MoviesWatchedController::class, "saveMovie"]);
+    Route::post("/watched_list/delete", [MoviesWatchedController::class, "deleteMovie"]);
 
     Route::get("/search/{title}", [SearchController::class, "search"]);
 
