@@ -27,13 +27,24 @@ class WishlistMoviesController extends Controller
 
         $user = Auth::user();
 
-        $movieWatchedCreated = WishlistMovies::create([
+        $movieCreated = WishlistMovies::create([
             "id_user" => $user["id"],
             "id_movie" => $validated["id_movie"],
             "title" => $validated["title"],
             "poster" => $validated["poster"]
         ]);
 
-        return response()->json($movieWatchedCreated, 200);
+        return response()->json($movieCreated, 200);
+    }
+
+    public function deleteMovie(Request $request)
+    {
+        $validated = $request->validate([
+            "id_movie" => "required|string",
+        ]);
+
+        $MovieDeleted = WishlistMovies::where("id_movie", $validated["id_movie"])->delete();
+
+        return response()->json($MovieDeleted, 200);
     }
 }

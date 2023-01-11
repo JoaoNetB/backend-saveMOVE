@@ -103,4 +103,72 @@ class WishlistMoviesControllerTest extends TestCase
             ->etc()
         );
     }
+
+    public function test_delete_movie_in_movies_wishlist()
+    {
+        $user = User::factory()->create([
+            "email" => "test@test.com"
+        ]);
+
+        Sanctum::actingAs($user);
+
+        WishlistMovies::factory()->create([
+            "id_user" => 1,
+            "id_movie" => 12234,
+            "title" => "teste",
+            "poster" => "https://teste.jpg"
+        ]);
+
+        $response = $this->postJson('/api/wishlist_movie/delete', [
+            "id_movie" => "12234"
+        ]);
+
+        $response->assertStatus(200);
+
+        $response->assertContent("1");
+    }
+
+    public function test_delete_movie_with_non_existent_id()
+    {
+        $user = User::factory()->create([
+            "email" => "test@test.com"
+        ]);
+
+        Sanctum::actingAs($user);
+
+        WishlistMovies::factory()->create([
+            "id_user" => 1,
+            "id_movie" => 12234,
+            "title" => "teste",
+            "poster" => "https://teste.jpg"
+        ]);
+
+        $response = $this->postJson('/api/wishlist_movie/delete', [
+            "id_movie" => "12234444"
+        ]);
+
+        $response->assertStatus(200);
+
+        $response->assertContent("0");
+    }
+
+    public function test_delete_movie_in_movies_wishlist_without_id()
+    {
+        $user = User::factory()->create([
+            "email" => "test@test.com"
+        ]);
+
+        Sanctum::actingAs($user);
+
+        $response = $this->postJson('/api/watched_list/delete', [
+            "id_movie" => ""
+        ]);
+
+        $response->assertStatus(422);
+
+        $response->assertJson(fn (AssertableJson $json) =>
+        $json->where("message", "The id movie field is required.")
+            ->etc()
+        );
+    }
 }
