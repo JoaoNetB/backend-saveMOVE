@@ -5,10 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
-{   
+{
     use RefreshDatabase;
     /**
      * A basic test example.
@@ -55,5 +56,23 @@ class UserControllerTest extends TestCase
         ]);
 
         $response->assertStatus(401);
+    }
+
+    public function test_user_register_application()
+    {
+        $response = $this->post("/api/register", [
+            "name" => "teste",
+            "email" => "teste@teste.com",
+            "password" => "teste123"
+        ]);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(fn (AssertableJson $json) =>
+        $json->where("name", "teste")
+            ->where("email", "teste@teste.com")
+            ->where("id", 1)
+            ->etc()
+        );
     }
 }
